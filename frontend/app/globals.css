@@ -1,0 +1,286 @@
+@import "tailwindcss";
+
+/* ─── EBOJE P DESIGN TOKENS ─────────────────────────────────────────────── */
+
+@theme {
+  /* Colors */
+  --color-obsidian:        #071B16;
+  --color-forest:          #123C32;
+  --color-ivory:           #F5F1E8;
+  --color-gold:            #C6A15B;
+  --color-text-primary:    #17201D;
+  --color-text-secondary:  #69736F;
+  --color-white:           #FFFFFF;
+
+  /* Semantic aliases */
+  --color-background:      var(--color-ivory);
+  --color-foreground:      var(--color-text-primary);
+  --color-surface-dark:    var(--color-obsidian);
+  --color-surface-mid:     var(--color-forest);
+  --color-accent:          var(--color-gold);
+
+  /* Typography */
+  --font-display: var(--font-cormorant), "Georgia", serif;
+  --font-sans:    var(--font-manrope), "Inter", system-ui, sans-serif;
+
+  /* Font sizes */
+  --font-size-display-xl: clamp(3.5rem, 8vw, 7rem);
+  --font-size-display-lg: clamp(2.5rem, 5vw, 4.5rem);
+  --font-size-display-md: clamp(2rem, 4vw, 3rem);
+  --font-size-display-sm: clamp(1.5rem, 3vw, 2rem);
+
+  /* Spacing scale */
+  --spacing-section: clamp(5rem, 10vw, 9rem);
+  --spacing-container: clamp(1.25rem, 5vw, 2rem);
+
+  /* Border radius */
+  --radius-card: 0.25rem;
+  --radius-button: 0.125rem;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px 0 rgba(7, 27, 22, 0.08);
+  --shadow-card-hover: 0 8px 40px 0 rgba(7, 27, 22, 0.14);
+
+  /* Transitions */
+  --transition-base: 300ms ease;
+  --transition-slow: 600ms ease;
+
+  /* Z-index */
+  --z-nav: 100;
+  --z-modal: 200;
+  --z-toast: 300;
+}
+
+/* ─── BASE STYLES ────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-ivory);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ─── TYPOGRAPHY ─────────────────────────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+}
+
+p {
+  font-family: var(--font-sans);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img, video {
+  max-width: 100%;
+  display: block;
+}
+
+/* ─── UTILITY CLASSES ────────────────────────────────────────────────────── */
+
+.container-site {
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: var(--spacing-container);
+}
+
+.section-padding {
+  padding-block: var(--spacing-section);
+}
+
+/* Section label — e.g. "WHO WE ARE" */
+.label-section {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+/* Display headings */
+.heading-display {
+  font-family: var(--font-display);
+  font-size: var(--font-size-display-lg);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-text-primary);
+}
+
+.heading-display-light {
+  color: var(--color-white);
+}
+
+/* ─── BUTTONS ────────────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.875rem 2rem;
+  border-radius: var(--radius-button);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--color-gold);
+  color: var(--color-obsidian);
+  border-color: var(--color-gold);
+}
+
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--color-gold);
+}
+
+.btn-outline-light {
+  background-color: transparent;
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-outline-light:hover {
+  background-color: var(--color-white);
+  color: var(--color-obsidian);
+  border-color: var(--color-white);
+}
+
+.btn-outline-dark {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+}
+
+.btn-outline-dark:hover {
+  background-color: var(--color-obsidian);
+  color: var(--color-white);
+  border-color: var(--color-obsidian);
+}
+
+/* ─── CARDS ──────────────────────────────────────────────────────────────── */
+
+.card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+/* ─── IMAGE CONTAINERS ───────────────────────────────────────────────────── */
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ─── DARK SURFACE ───────────────────────────────────────────────────────── */
+
+.surface-dark {
+  background-color: var(--color-obsidian);
+  color: var(--color-white);
+}
+
+.surface-dark h1,
+.surface-dark h2,
+.surface-dark h3,
+.surface-dark h4 {
+  color: var(--color-white);
+}
+
+.surface-dark p {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ─── GOLD ACCENT LINE ───────────────────────────────────────────────────── */
+
+.gold-line {
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  background-color: var(--color-gold);
+}
+
+/* ─── REDUCED MOTION ─────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── NAVBAR RESPONSIVE ─────────────────────────────────────────────────── */
+
+.desktop-nav {
+  display: flex;
+}
+
+.mobile-menu-btn {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: flex;
+  }
+}
+
+/* ─── SCROLLBAR ──────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-ivory);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-forest);
+  border-radius: 3px;
+}
