@@ -2,8 +2,10 @@ import { Pool } from 'pg'
 import { createClient } from '@supabase/supabase-js'
 
 // PostgreSQL pool
+const connectionString = (process.env.DATABASE_URL || '').replace('?sslmode=require', '').replace('&sslmode=require', '')
+
 export const db = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString,
   ssl: { rejectUnauthorized: false },
   max: 20,
   idleTimeoutMillis: 30000,
