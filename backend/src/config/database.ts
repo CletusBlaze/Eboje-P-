@@ -1,11 +1,15 @@
 import { Pool } from 'pg'
 import { createClient } from '@supabase/supabase-js'
 
-// PostgreSQL pool
-const connectionString = (process.env.DATABASE_URL || '').replace('?sslmode=require', '').replace('&sslmode=require', '')
+// Parse DATABASE_URL manually to avoid pg's SSL mode parsing
+const dbUrl = new URL((process.env.DATABASE_URL || '').replace('?sslmode=require', '').replace('&sslmode=require', ''))
 
 export const db = new Pool({
-  connectionString,
+  host: dbUrl.hostname,
+  port: parseInt(dbUrl.port || '5432'),
+  user: decodeURIComponent(dbUrl.username),
+  password: decodeURIComponent(dbUrl.password),
+  database: dbUrl.pathname.replace('/', ''),
   ssl: { rejectUnauthorized: false },
   max: 20,
   idleTimeoutMillis: 30000,
